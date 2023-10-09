@@ -75,7 +75,10 @@ function focusTopicName() {
 function inputTopicName() {
 	btInsTopic.disabled = (tiTopicName.value === '');
 	btRenTopic.disabled = (tiTopicName.value === '' || slTopic.value === 'Default');
-	lbStatus.textContent = 'Editing the topic name...';
+	if (slFunc.value === 'New topic')
+		lbStatus.textContent = 'Editing the topic name...';
+	else if (slFunc.value === 'Search')
+		lbStatus.textContent = 'Editing the search regex...';
 }
 function insertTopic() {
 	let trimmed = tiTopicName.value.trim();
