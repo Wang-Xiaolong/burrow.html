@@ -117,6 +117,10 @@ function saveTopics() {
 }
 const btRenTopic = document.getElementById("btRenTopic");
 function renameTopic() {
+	if (slFunc.value === 'Search') {
+		searchRegexAll();
+		return;
+	}
 	const trimmed = tiTopicName.value.trim();
 	if (trimmed == "") return;
 	for (let i = 0; i < slTopic.options.length; i++) {
@@ -198,24 +202,6 @@ function saveMessage() {
 function clickSave() {
 	saveMessage();
 }
-document.addEventListener("keydown", function(event) {
-	if (event.ctrlKey && event.shiftKey && event.key === 'F') {
-		let kw = prompt('Please enter the keyword to search:');
-		let result = '';
-		if (kw === '' || kw === null) return;
-		for (let i = 0; i < slTopic.options.length; i++) {
-			let str = localStorage.getItem(baseKey + slTopic.options[i].text);
-			let matchLines = str.split('\n').filter(function(line) {
-				return line.toUpperCase().includes(kw.toUpperCase());
-			});
-			if (matchLines.length > 0) {
-				result += '====' + slTopic.options[i].text + '====\n'
-					+ matchLines.join('\n') + '\n';
-			}
-		}
-		if (result !== '') alert(result)
-	}
-});
 function searchRegex() {
 	let trimmed = tiTopicName.value.trim();
 	if (trimmed == "") return;
@@ -226,4 +212,21 @@ function searchRegex() {
 	if (matchedLines.length > 0) {
 		alert(matchedLines.join('\n'));
 	}
+}
+function searchRegexAll() {
+	let trimmed = tiTopicName.value.trim();
+	if (trimmed == "") return;
+	const regex = new RegExp(trimmed, 'i');
+	let result = '';
+	for (let i = 0; i < slTopic.options.length; i++) {
+		let str = localStorage.getItem(baseKey + slTopic.options[i].text);
+		let matchedLines = str.split('\n').filter(function(line) {
+			return line.match(regex);
+		});
+		if (matchedLines.length > 0) {
+			result += '------' + slTopic.options[i].text + '------\n'
+				+ matchedLines.join('\n') + '\n';
+		}
+	}
+	if (result !== '') alert(result)
 }
