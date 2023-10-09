@@ -52,6 +52,9 @@ const slFunc = document.getElementById("slFunc");
 const tiTopicName = document.getElementById("tiTopicName");
 const btInsTopic = document.getElementById("btInsTopic");
 function changeFunc() {
+	tiTopicName.value = '';
+	btInsTopic.disabled = true;
+	btRenTopic.disabled = true;
 	if (slFunc.value === 'New topic') {
 		btInsTopic.textContent = 'Insert';
 		btRenTopic.textContent = 'Rename';
