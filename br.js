@@ -54,8 +54,10 @@ const btInsTopic = document.getElementById("btInsTopic");
 function changeFunc() {
 	if (slFunc.value === 'New topic') {
 		btInsTopic.textContent = 'Insert';
+		tiTopicName.placeholder = 'Name it here.'
 	} else if (slFunc.value === 'Search') {
 		btInsTopic.textContent = 'Search';
+		tiTopicName.placeholder = 'Input regex here.'
 	}
 }
 tiTopicName.addEventListener('keydown', function(event) {
