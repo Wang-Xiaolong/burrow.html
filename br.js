@@ -76,11 +76,13 @@ function focusTopicName() {
 }
 function inputTopicName() {
 	btInsTopic.disabled = (tiTopicName.value === '');
-	btRenTopic.disabled = (tiTopicName.value === '' || slTopic.value === 'Default');
-	if (slFunc.value === 'New topic')
+	if (slFunc.value === 'New topic') {
 		lbStatus.textContent = 'Editing the topic name...';
-	else if (slFunc.value === 'Search')
+		btRenTopic.disabled = (tiTopicName.value === '' || slTopic.value === 'Default');
+	} else if (slFunc.value === 'Search') {
 		lbStatus.textContent = 'Editing the search regex...';
+		btRenTopic.disabled = (tiTopicName.value === '');
+	}
 }
 function insertTopic() {
 	if (slFunc.value === 'Search') {
