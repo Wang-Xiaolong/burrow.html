@@ -1,0 +1,8 @@
+* { font-family:'M PLUS 1 Code'; font-size:12px; }
+body { background-color:black; color:white; margin:0; }
+div { display:flex; flex-wrap:wrap; }
+select { background-color:darkgray; color:white; }
+select option { order:-1; }
+input { background-color:darkgray; color:white; }
+textarea { resize:none; background-color:black; color:white; }
+label { margin-left:0.5em; }

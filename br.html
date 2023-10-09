@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Burrow</title>
+<link rel="stylesheet" href="br.css">
+</head>
+<body>
+<div><select id="slTopic" onchange="changeTopic()">
+	<option value='Default'>Default</option>
+</select>
+<button id="btDelTopic" disabled onclick="deleteTopic()">Del</button>
+<select id="slFunc" onchange="changeFunc()">
+	<option value='New topic'>New topic</option>
+	<option value='Search'>Search</option>
+</select>
+<input type="text" id="tiTopicName" placeholder="Name it here." size='12' onfocus="focusTopicName()" oninput="inputTopicName()"></input>
+<button id="btInsTopic" disabled onclick="insertTopic()">Insert</button>
+<button id="btRenTopic" disabled onclick="renameTopic()">Rename</button></div>
+<div><textarea id="taHistory" rows="16" style="width:100%;" placeholder="Please view, edit and press Ctrl+Enter to save the history here..." onfocus="focusHistory()" oninput="inputHistory()" onkeydown="keydownHistory(event)" onblur="blurHistory()"></textarea></div>
+<div><textarea id="taMessage" rows="8" style="width:100%;" placeholder="Please type the message here, and press Ctrl+Enter to save it to the history..." onfocus="focusMessage()" oninput="inputMessage()" onkeydown="keydownMessage(event)"></textarea></div>
+<div><button id="btSave" disabled onclick="clickSave()">Save</button>
+<label id="lbStatus">Ready.</label></div>
+<script src="br.js"></script>
+</body>
+</html>
