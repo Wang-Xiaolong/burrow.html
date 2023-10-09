@@ -54,9 +54,11 @@ const btInsTopic = document.getElementById("btInsTopic");
 function changeFunc() {
 	if (slFunc.value === 'New topic') {
 		btInsTopic.textContent = 'Insert';
+		btRenTopic.textContent = 'Rename';
 		tiTopicName.placeholder = 'Name it here.'
 	} else if (slFunc.value === 'Search') {
-		btInsTopic.textContent = 'Search';
+		btInsTopic.textContent = 'InTopic';
+		btRenTopic.textContent = 'All';
 		tiTopicName.placeholder = 'Input regex here.'
 	}
 }
