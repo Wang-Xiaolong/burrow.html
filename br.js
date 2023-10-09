@@ -81,6 +81,10 @@ function inputTopicName() {
 		lbStatus.textContent = 'Editing the search regex...';
 }
 function insertTopic() {
+	if (slFunc.value === 'Search') {
+		searchRegex();
+		return;
+	}
 	let trimmed = tiTopicName.value.trim();
 	if (trimmed == "") return;
 	for (let i = 0; i < slTopic.options.length; i++) {
@@ -208,3 +212,14 @@ document.addEventListener("keydown", function(event) {
 		if (result !== '') alert(result)
 	}
 });
+function searchRegex() {
+	let trimmed = tiTopicName.value.trim();
+	if (trimmed == "") return;
+	const regex = new RegExp(trimmed, 'i')
+	let matchedLines = taHistory.value.split('\n').filter(function(line) {
+		return line.match(regex);
+	});
+	if (matchedLines.length > 0) {
+		alert(matchedLines.join('\n'));
+	}
+}
