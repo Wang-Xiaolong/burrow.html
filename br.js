@@ -57,7 +57,7 @@ function changeFunc() {
 		btRenTopic.textContent = 'Rename';
 		tiTopicName.placeholder = 'Name it here.'
 	} else if (slFunc.value === 'Search') {
-		btInsTopic.textContent = 'InTopic';
+		btInsTopic.textContent = 'InThis';
 		btRenTopic.textContent = 'All';
 		tiTopicName.placeholder = 'Input regex here.'
 	}
