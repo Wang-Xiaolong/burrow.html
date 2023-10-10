@@ -223,6 +223,7 @@ function searchRegexAll() {
 	let result = '';
 	for (let i = 0; i < slTopic.options.length; i++) {
 		let str = localStorage.getItem(baseKey + slTopic.options[i].text);
+		if (str === null) continue;
 		let matchedLines = str.split('\n').filter(function(line) {
 			return line.match(regex);
 		});
