@@ -9,21 +9,25 @@
 <select id="slTopic" size='5' onchange="changeTopic()">
 	<option value='Default'>Default</option>
 </select>
-<br>
+<br><div>
 <button id="btDelTopic" disabled onclick="deleteTopic()">Del</button>
-<label for="tiTopicName">New topic:</label>
-<br>
+<select id="slFunc" onchange="changeFunc()">
+	<option value='New topic'>New topic</option>
+	<option value='Search'>Search</option>
+</select>
+</div>
 <input type="text" id="tiTopicName" placeholder="Name it here." size='12' onfocus="focusTopicName()" oninput="inputTopicName()"></input>
-<br>
+<div>
 <button id="btInsTopic" disabled onclick="insertTopic()">Insert</button>
 <button id="btRenTopic" disabled onclick="renameTopic()">Rename</button>
-</td><td>
+</div></td><td>
 <textarea id="taHistory" rows="10" cols="80" placeholder="Please view, edit and press Ctrl+Enter to save the history here..." onfocus="focusHistory()" oninput="inputHistory()" onkeydown="keydownHistory(event)" onblur="blurHistory()"></textarea>
 </td><td>
-<textarea id="taMessage" rows="8" cols="80" placeholder="Please type the message here, and press Ctrl+Enter to save it to the history..." onfocus="focusMessage()" oninput="inputMessage()" onkeydown="keydownMessage(event)"></textarea><br>
+<textarea id="taMessage" rows="8" cols="80" placeholder="Please type the message here, and press Ctrl+Enter to save it to the history..." onfocus="focusMessage()" oninput="inputMessage()" onkeydown="keydownMessage(event)"></textarea>
+<div>
 <button id="btSave" disabled onclick="clickSave()">Save</button>
 <label id="lbStatus">Ready.</label>
-</td></tr></table>
+</div></td></tr></table>
 <script src="br.js"></script>
 </body>
 </html>

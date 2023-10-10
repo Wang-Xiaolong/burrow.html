@@ -6,3 +6,5 @@ select option { order:-1; }
 input { background-color:darkgray; color:white; }
 textarea { resize:none; background-color:black; color:white; }
 label { margin-left:0.5em; }
+table { border-collapse: collapse; }
+td { padding:0; }
