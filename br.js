@@ -63,9 +63,9 @@ function changeFunc() {
 		btInsTopic.textContent = 'InThis';
 		btRenTopic.textContent = 'All';
 		tiTopicName.placeholder = 'Input regex here.'
-	} else if (slFunc.value === 'Save/Load') {
-		btInsTopic.textContent = 'Save';
-		btRenTopic.textContent = 'Load';
+	} else if (slFunc.value === 'Down/Upload') {
+		btInsTopic.textContent = 'Down';
+		btRenTopic.textContent = 'Upload';
 		tiTopicName.placeholder = 'Local file path...'
 	}
 }
@@ -91,7 +91,7 @@ function inputTopicName() {
 	} else if (slFunc.value === 'Search') {
 		lbStatus.textContent = 'Editing the search regex...';
 		btRenTopic.disabled = (tiTopicName.value === '');
-	} else if (slFunc.value === 'Save/Load') {
+	} else if (slFunc.value === 'Down/Upload') {
 		lbStatus.textContent = 'Editing local file path...';
 		btRenTopic.disabled = (tiTopicName.value === '');
 	}
@@ -100,8 +100,8 @@ function insertTopic() {
 	if (slFunc.value === 'Search') {
 		searchRegex();
 		return;
-	} else if (slFunc.value === 'Save/Load') {
-		exportTopics();
+	} else if (slFunc.value === 'Down/Upload') {
+		downloadTopics();
 		return;
 	}
 	let trimmed = tiTopicName.value.trim();
@@ -246,7 +246,7 @@ function searchRegexAll() {
 	}
 	if (result !== '') alert(result)
 }
-function exportTopics() {
+function downloadTopics() {
 	let topics = {};
 	for (let i = 0; i < slTopic.options.length; i++) {
 		let str = localStorage.getItem(baseKey + slTopic.options[i].text);
