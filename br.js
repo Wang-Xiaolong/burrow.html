@@ -100,6 +100,9 @@ function insertTopic() {
 	if (slFunc.value === 'Search') {
 		searchRegex();
 		return;
+	} else if (slFunc.value === 'Save/Load') {
+		exportTopics();
+		return;
 	}
 	let trimmed = tiTopicName.value.trim();
 	if (trimmed == "") return;
@@ -242,4 +245,20 @@ function searchRegexAll() {
 		}
 	}
 	if (result !== '') alert(result)
+}
+function exportTopics() {
+	let topics = {};
+	for (let i = 0; i < slTopic.options.length; i++) {
+		let str = localStorage.getItem(baseKey + slTopic.options[i].text);
+		if (str === null) continue;
+		topics[slTopic.options[i].text] = str;
+	}
+	const data = JSON.stringify(topics);
+	const blob = new Blob([data], { type: "application/json" });
+	const url = URL.createObjectURL(blob);
+	const link = document.createElement("a");
+	link.setAttribute("href", url);
+	link.setAttribute("download", Category + '.json');
+	document.body.appendChild(link);
+	link.click();
 }
