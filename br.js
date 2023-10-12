@@ -135,6 +135,9 @@ function clickBtFunc2() {
 	if (slFunc.value === 'Search') {
 		searchRegexAnywhere();
 		return;
+	} else if (slFunc.value === 'Down/Upload') {
+		loadThreads();
+		return;
 	}
 	const trimmed = tiFunc.value.trim();
 	if (trimmed == "") return;
@@ -261,4 +264,21 @@ function downloadThreads() {
 	link.setAttribute("download", proc + '.json');
 	document.body.appendChild(link);
 	link.click();
+	link.remove();
+}
+function loadThreads() {
+	const input = document.createElement('input');
+	input.type = 'file';
+	input.accept = '.json';
+	input.onchange = function(event) {
+		const file = event.target.files[0];
+		const reader = new FileReader();
+		reader.onload = function(event) {
+			const data = JSON.parse(event.target.result);
+			console.log(data);
+		};
+		reader.readAsText(file);
+	};
+	input.click();
+	input.remove();
 }
