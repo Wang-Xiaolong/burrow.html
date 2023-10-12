@@ -1,9 +1,9 @@
 const urlParams = new URLSearchParams(window.location.search);
-const Category = urlParams.get('cat');
+const proc = urlParams.get('proc');
 let baseKey = "Burrow";
-if (Category != null) {
-	document.title = "Burrow:" + Category;
-	baseKey = "Burrow/" + Category + '/';
+if (proc != null) {
+	document.title = "Burrow:" + proc;
+	baseKey = "Burrow/" + proc + '/';
 }
 const slThread = document.getElementById("slThread");
 const keysStr = localStorage.getItem(baseKey)
@@ -258,7 +258,7 @@ function downloadThreads() {
 	const url = URL.createObjectURL(blob);
 	const link = document.createElement("a");
 	link.setAttribute("href", url);
-	link.setAttribute("download", Category + '.json');
+	link.setAttribute("download", proc + '.json');
 	document.body.appendChild(link);
 	link.click();
 }
