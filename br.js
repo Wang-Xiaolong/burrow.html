@@ -60,8 +60,8 @@ function changeFunc() {
 		btFunc2.textContent = 'Rename';
 		tiFunc.placeholder = 'Name it here.'
 	} else if (slFunc.value === 'Search') {
-		btFunc1.textContent = 'InThis';
-		btFunc2.textContent = 'All';
+		btFunc1.textContent = 'Here';
+		btFunc2.textContent = 'Anywhere';
 		tiFunc.placeholder = 'Input regex here.'
 	} else if (slFunc.value === 'Down/Upload') {
 		btFunc1.textContent = 'Down';
@@ -98,7 +98,7 @@ function inputTopicName() {
 }
 function insertTopic() {
 	if (slFunc.value === 'Search') {
-		searchRegex();
+		searchRegexHere();
 		return;
 	} else if (slFunc.value === 'Down/Upload') {
 		downloadTopics();
@@ -133,7 +133,7 @@ function saveTopics() {
 const btFunc2 = document.getElementById("btFunc2");
 function renameTopic() {
 	if (slFunc.value === 'Search') {
-		searchRegexAll();
+		searchRegexAnywhere();
 		return;
 	}
 	const trimmed = tiFunc.value.trim();
@@ -217,7 +217,7 @@ function saveMessage() {
 function clickSave() {
 	saveMessage();
 }
-function searchRegex() {
+function searchRegexHere() {
 	let trimmed = tiFunc.value.trim();
 	if (trimmed == "") return;
 	const regex = new RegExp(trimmed, 'i')
@@ -228,7 +228,7 @@ function searchRegex() {
 		alert(matchedLines.join('\n'));
 	}
 }
-function searchRegexAll() {
+function searchRegexAnywhere() {
 	let trimmed = tiFunc.value.trim();
 	if (trimmed == "") return;
 	const regex = new RegExp(trimmed, 'i');
