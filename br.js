@@ -50,21 +50,21 @@ function deleteTopic() {
 }
 const slFunc = document.getElementById("slFunc");
 const tiFunc = document.getElementById("tiFunc");
-const btInsTopic = document.getElementById("btInsTopic");
+const btFunc1 = document.getElementById("btFunc1");
 function changeFunc() {
 	tiFunc.value = '';
-	btInsTopic.disabled = true;
+	btFunc1.disabled = true;
 	btRenTopic.disabled = true;
 	if (slFunc.value === 'New topic') {
-		btInsTopic.textContent = 'Insert';
+		btFunc1.textContent = 'Insert';
 		btRenTopic.textContent = 'Rename';
 		tiFunc.placeholder = 'Name it here.'
 	} else if (slFunc.value === 'Search') {
-		btInsTopic.textContent = 'InThis';
+		btFunc1.textContent = 'InThis';
 		btRenTopic.textContent = 'All';
 		tiFunc.placeholder = 'Input regex here.'
 	} else if (slFunc.value === 'Down/Upload') {
-		btInsTopic.textContent = 'Down';
+		btFunc1.textContent = 'Down';
 		btRenTopic.textContent = 'Upload';
 		tiFunc.placeholder = 'Local file path...'
 	}
@@ -73,10 +73,10 @@ tiFunc.addEventListener('keydown', function(event) {
 	if (event.ctrlKey && event.key === 'Enter') {
 		btRenTopic.click();
 	} else if (event.key === 'Insert' || event.key === 'Enter') {
-		btInsTopic.click();
+		btFunc1.click();
 	} else if (event.key === 'Escape') {
 		this.value = ''
-		btInsTopic.disabled = true;
+		btFunc1.disabled = true;
 		btRenTopic.disabled = true;
 	}
 });
@@ -84,7 +84,7 @@ function focusTopicName() {
 	lbStatus.textContent = 'Ready to name a topic.';
 }
 function inputTopicName() {
-	btInsTopic.disabled = (tiFunc.value === '');
+	btFunc1.disabled = (tiFunc.value === '');
 	if (slFunc.value === 'New topic') {
 		lbStatus.textContent = 'Editing the topic name...';
 		btRenTopic.disabled = (tiFunc.value === '' || slTopic.value === 'Default');
@@ -119,7 +119,7 @@ function insertTopic() {
 	slTopic.value = trimmed;
 	changeTopic()
 	saveTopics();
-	tiFunc.value = ''; btInsTopic.disabled = true; btRenTopic.disabled = true;
+	tiFunc.value = ''; btFunc1.disabled = true; btRenTopic.disabled = true;
 	lbStatus.textContent = trimmed + ' was added as a new dialog.';
 }
 function saveTopics() {
@@ -154,7 +154,7 @@ function renameTopic() {
 	localStorage.removeItem(baseKey + oldKey);
 	saveTopics();
 	curKey = trimmed;
-	tiFunc.value = ''; btInsTopic.disabled = true; btRenTopic.disabled = true;
+	tiFunc.value = ''; btFunc1.disabled = true; btRenTopic.disabled = true;
 	lbStatus.textContent = 'Dialog ' + oldKey + ' has been renamed to ' + trimmed + '.'
 }
 const taHistory = document.getElementById("taHistory");
