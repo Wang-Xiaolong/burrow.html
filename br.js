@@ -96,7 +96,7 @@ function inputTiFunc() {
 		btFunc2.disabled = (tiFunc.value === '');
 	}
 }
-function insertTopic() {
+function clickBtFunc1() {
 	if (slFunc.value === 'Search') {
 		searchRegexHere();
 		return;
@@ -131,7 +131,7 @@ function saveTopics() {
 	localStorage.setItem(baseKey, vals.join(";"));
 }
 const btFunc2 = document.getElementById("btFunc2");
-function renameTopic() {
+function clickBtFunc2() {
 	if (slFunc.value === 'Search') {
 		searchRegexAnywhere();
 		return;
