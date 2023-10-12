@@ -252,8 +252,7 @@ function searchRegexAnywhere() {
 function downloadThreads() {
 	let topics = {};
 	for (let i = 0; i < slThread.options.length; i++) {
-		let str = localStorage.getItem(baseKey + slThread.options[i].text);
-		if (str === null) continue;
+		let str = localStorage.getItem(baseKey + slThread.options[i].text) || '';
 		topics[slThread.options[i].text] = str;
 	}
 	const data = JSON.stringify(topics);
