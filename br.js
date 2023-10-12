@@ -26,7 +26,7 @@ function changeTopic() {
 		btRenTopic.disabled = true;
 	} else {
 		btDelTopic.disabled = false;
-		btRenTopic.disabled = (tiTopicName.value == '')
+		btRenTopic.disabled = (tiFunc.value == '')
 	}
 	lbStatus.textContent = 'Switched to ' + curKey;
 }
@@ -49,27 +49,27 @@ function deleteTopic() {
 	saveTopics();
 }
 const slFunc = document.getElementById("slFunc");
-const tiTopicName = document.getElementById("tiTopicName");
+const tiFunc = document.getElementById("tiFunc");
 const btInsTopic = document.getElementById("btInsTopic");
 function changeFunc() {
-	tiTopicName.value = '';
+	tiFunc.value = '';
 	btInsTopic.disabled = true;
 	btRenTopic.disabled = true;
 	if (slFunc.value === 'New topic') {
 		btInsTopic.textContent = 'Insert';
 		btRenTopic.textContent = 'Rename';
-		tiTopicName.placeholder = 'Name it here.'
+		tiFunc.placeholder = 'Name it here.'
 	} else if (slFunc.value === 'Search') {
 		btInsTopic.textContent = 'InThis';
 		btRenTopic.textContent = 'All';
-		tiTopicName.placeholder = 'Input regex here.'
+		tiFunc.placeholder = 'Input regex here.'
 	} else if (slFunc.value === 'Down/Upload') {
 		btInsTopic.textContent = 'Down';
 		btRenTopic.textContent = 'Upload';
-		tiTopicName.placeholder = 'Local file path...'
+		tiFunc.placeholder = 'Local file path...'
 	}
 }
-tiTopicName.addEventListener('keydown', function(event) {
+tiFunc.addEventListener('keydown', function(event) {
 	if (event.ctrlKey && event.key === 'Enter') {
 		btRenTopic.click();
 	} else if (event.key === 'Insert' || event.key === 'Enter') {
@@ -84,16 +84,16 @@ function focusTopicName() {
 	lbStatus.textContent = 'Ready to name a topic.';
 }
 function inputTopicName() {
-	btInsTopic.disabled = (tiTopicName.value === '');
+	btInsTopic.disabled = (tiFunc.value === '');
 	if (slFunc.value === 'New topic') {
 		lbStatus.textContent = 'Editing the topic name...';
-		btRenTopic.disabled = (tiTopicName.value === '' || slTopic.value === 'Default');
+		btRenTopic.disabled = (tiFunc.value === '' || slTopic.value === 'Default');
 	} else if (slFunc.value === 'Search') {
 		lbStatus.textContent = 'Editing the search regex...';
-		btRenTopic.disabled = (tiTopicName.value === '');
+		btRenTopic.disabled = (tiFunc.value === '');
 	} else if (slFunc.value === 'Down/Upload') {
 		lbStatus.textContent = 'Editing local file path...';
-		btRenTopic.disabled = (tiTopicName.value === '');
+		btRenTopic.disabled = (tiFunc.value === '');
 	}
 }
 function insertTopic() {
@@ -104,7 +104,7 @@ function insertTopic() {
 		downloadTopics();
 		return;
 	}
-	let trimmed = tiTopicName.value.trim();
+	let trimmed = tiFunc.value.trim();
 	if (trimmed == "") return;
 	for (let i = 0; i < slTopic.options.length; i++) {
 		if (slTopic.options[i].text == trimmed) {
@@ -119,7 +119,7 @@ function insertTopic() {
 	slTopic.value = trimmed;
 	changeTopic()
 	saveTopics();
-	tiTopicName.value = ''; btInsTopic.disabled = true; btRenTopic.disabled = true;
+	tiFunc.value = ''; btInsTopic.disabled = true; btRenTopic.disabled = true;
 	lbStatus.textContent = trimmed + ' was added as a new dialog.';
 }
 function saveTopics() {
@@ -136,7 +136,7 @@ function renameTopic() {
 		searchRegexAll();
 		return;
 	}
-	const trimmed = tiTopicName.value.trim();
+	const trimmed = tiFunc.value.trim();
 	if (trimmed == "") return;
 	for (let i = 0; i < slTopic.options.length; i++) {
 		if (slTopic.options[i].text == trimmed) {
@@ -154,7 +154,7 @@ function renameTopic() {
 	localStorage.removeItem(baseKey + oldKey);
 	saveTopics();
 	curKey = trimmed;
-	tiTopicName.value = ''; btInsTopic.disabled = true; btRenTopic.disabled = true;
+	tiFunc.value = ''; btInsTopic.disabled = true; btRenTopic.disabled = true;
 	lbStatus.textContent = 'Dialog ' + oldKey + ' has been renamed to ' + trimmed + '.'
 }
 const taHistory = document.getElementById("taHistory");
@@ -218,7 +218,7 @@ function clickSave() {
 	saveMessage();
 }
 function searchRegex() {
-	let trimmed = tiTopicName.value.trim();
+	let trimmed = tiFunc.value.trim();
 	if (trimmed == "") return;
 	const regex = new RegExp(trimmed, 'i')
 	let matchedLines = taHistory.value.split('\n').filter(function(line) {
@@ -229,7 +229,7 @@ function searchRegex() {
 	}
 }
 function searchRegexAll() {
-	let trimmed = tiTopicName.value.trim();
+	let trimmed = tiFunc.value.trim();
 	if (trimmed == "") return;
 	const regex = new RegExp(trimmed, 'i');
 	let result = '';
