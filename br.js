@@ -63,10 +63,16 @@ function changeFunc() {
 		btInsTopic.textContent = 'InThis';
 		btRenTopic.textContent = 'All';
 		tiTopicName.placeholder = 'Input regex here.'
+	} else if (slFunc.value === 'Save/Load') {
+		btInsTopic.textContent = 'Save';
+		btRenTopic.textContent = 'Load';
+		tiTopicName.placeholder = 'Local file path...'
 	}
 }
 tiTopicName.addEventListener('keydown', function(event) {
-	if (event.key === 'Insert' || event.key === 'Enter') {
+	if (event.ctrlKey && event.key === 'Enter') {
+		btRenTopic.click();
+	} else if (event.key === 'Insert' || event.key === 'Enter') {
 		btInsTopic.click();
 	} else if (event.key === 'Escape') {
 		this.value = ''
@@ -84,6 +90,9 @@ function inputTopicName() {
 		btRenTopic.disabled = (tiTopicName.value === '' || slTopic.value === 'Default');
 	} else if (slFunc.value === 'Search') {
 		lbStatus.textContent = 'Editing the search regex...';
+		btRenTopic.disabled = (tiTopicName.value === '');
+	} else if (slFunc.value === 'Save/Load') {
+		lbStatus.textContent = 'Editing local file path...';
 		btRenTopic.disabled = (tiTopicName.value === '');
 	}
 }
