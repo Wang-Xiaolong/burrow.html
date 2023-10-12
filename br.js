@@ -80,10 +80,10 @@ tiFunc.addEventListener('keydown', function(event) {
 		btFunc2.disabled = true;
 	}
 });
-function focusTopicName() {
+function focusTiFunc() {
 	lbStatus.textContent = 'Ready to name a topic.';
 }
-function inputTopicName() {
+function inputTiFunc() {
 	btFunc1.disabled = (tiFunc.value === '');
 	if (slFunc.value === 'New topic') {
 		lbStatus.textContent = 'Editing the topic name...';
