@@ -23,10 +23,10 @@ function changeTopic() {
 	taHistory.value = localStorage.getItem(baseKey + curKey);
 	if (curKey == 'Default') {
 		btDelTopic.disabled = true;
-		btRenTopic.disabled = true;
+		btFunc2.disabled = true;
 	} else {
 		btDelTopic.disabled = false;
-		btRenTopic.disabled = (tiFunc.value == '')
+		btFunc2.disabled = (tiFunc.value == '')
 	}
 	lbStatus.textContent = 'Switched to ' + curKey;
 }
@@ -54,30 +54,30 @@ const btFunc1 = document.getElementById("btFunc1");
 function changeFunc() {
 	tiFunc.value = '';
 	btFunc1.disabled = true;
-	btRenTopic.disabled = true;
+	btFunc2.disabled = true;
 	if (slFunc.value === 'New topic') {
 		btFunc1.textContent = 'Insert';
-		btRenTopic.textContent = 'Rename';
+		btFunc2.textContent = 'Rename';
 		tiFunc.placeholder = 'Name it here.'
 	} else if (slFunc.value === 'Search') {
 		btFunc1.textContent = 'InThis';
-		btRenTopic.textContent = 'All';
+		btFunc2.textContent = 'All';
 		tiFunc.placeholder = 'Input regex here.'
 	} else if (slFunc.value === 'Down/Upload') {
 		btFunc1.textContent = 'Down';
-		btRenTopic.textContent = 'Upload';
+		btFunc2.textContent = 'Upload';
 		tiFunc.placeholder = 'Local file path...'
 	}
 }
 tiFunc.addEventListener('keydown', function(event) {
 	if (event.ctrlKey && event.key === 'Enter') {
-		btRenTopic.click();
+		btFunc2.click();
 	} else if (event.key === 'Insert' || event.key === 'Enter') {
 		btFunc1.click();
 	} else if (event.key === 'Escape') {
 		this.value = ''
 		btFunc1.disabled = true;
-		btRenTopic.disabled = true;
+		btFunc2.disabled = true;
 	}
 });
 function focusTopicName() {
@@ -87,13 +87,13 @@ function inputTopicName() {
 	btFunc1.disabled = (tiFunc.value === '');
 	if (slFunc.value === 'New topic') {
 		lbStatus.textContent = 'Editing the topic name...';
-		btRenTopic.disabled = (tiFunc.value === '' || slTopic.value === 'Default');
+		btFunc2.disabled = (tiFunc.value === '' || slTopic.value === 'Default');
 	} else if (slFunc.value === 'Search') {
 		lbStatus.textContent = 'Editing the search regex...';
-		btRenTopic.disabled = (tiFunc.value === '');
+		btFunc2.disabled = (tiFunc.value === '');
 	} else if (slFunc.value === 'Down/Upload') {
 		lbStatus.textContent = 'Editing local file path...';
-		btRenTopic.disabled = (tiFunc.value === '');
+		btFunc2.disabled = (tiFunc.value === '');
 	}
 }
 function insertTopic() {
@@ -119,7 +119,7 @@ function insertTopic() {
 	slTopic.value = trimmed;
 	changeTopic()
 	saveTopics();
-	tiFunc.value = ''; btFunc1.disabled = true; btRenTopic.disabled = true;
+	tiFunc.value = ''; btFunc1.disabled = true; btFunc2.disabled = true;
 	lbStatus.textContent = trimmed + ' was added as a new dialog.';
 }
 function saveTopics() {
@@ -130,7 +130,7 @@ function saveTopics() {
 	vals.sort()
 	localStorage.setItem(baseKey, vals.join(";"));
 }
-const btRenTopic = document.getElementById("btRenTopic");
+const btFunc2 = document.getElementById("btFunc2");
 function renameTopic() {
 	if (slFunc.value === 'Search') {
 		searchRegexAll();
@@ -154,7 +154,7 @@ function renameTopic() {
 	localStorage.removeItem(baseKey + oldKey);
 	saveTopics();
 	curKey = trimmed;
-	tiFunc.value = ''; btFunc1.disabled = true; btRenTopic.disabled = true;
+	tiFunc.value = ''; btFunc1.disabled = true; btFunc2.disabled = true;
 	lbStatus.textContent = 'Dialog ' + oldKey + ' has been renamed to ' + trimmed + '.'
 }
 const taHistory = document.getElementById("taHistory");
