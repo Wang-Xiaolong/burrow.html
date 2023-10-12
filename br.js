@@ -5,7 +5,7 @@ if (Category != null) {
 	document.title = "Burrow:" + Category;
 	baseKey = "Burrow/" + Category + '/';
 }
-const slTopic = document.getElementById("slTopic");
+const slThread = document.getElementById("slThread");
 const keysStr = localStorage.getItem(baseKey)
 if (keysStr !== null) {
 	const keys = keysStr.split(";");
@@ -14,39 +14,39 @@ if (keysStr !== null) {
 		const opt = document.createElement("option");
 		opt.text = key;
 		opt.value = key;
-		slTopic.options.add(opt);
+		slThread.options.add(opt);
 	}
 }
 let curKey = 'Default';
-function changeTopic() {
-	curKey = slTopic.value
+function changeThread() {
+	curKey = slThread.value
 	taHistory.value = localStorage.getItem(baseKey + curKey);
 	if (curKey == 'Default') {
-		btDelTopic.disabled = true;
+		btDelThread.disabled = true;
 		btFunc2.disabled = true;
 	} else {
-		btDelTopic.disabled = false;
+		btDelThread.disabled = false;
 		btFunc2.disabled = (tiFunc.value == '')
 	}
 	lbStatus.textContent = 'Switched to ' + curKey;
 }
-const btDelTopic = document.getElementById("btDelTopic");
-slTopic.addEventListener('keydown', function(event) {
+const btDelThread = document.getElementById("btDelThread");
+slThread.addEventListener('keydown', function(event) {
 	if (event.key === 'Delete') {
-		btDelTopic.click();
+		btDelThread.click();
 	}
 });
-function deleteTopic() {
-	let opt = slTopic.options[slTopic.selectedIndex];
+function deleteThread() {
+	let opt = slThread.options[slThread.selectedIndex];
 	if (opt.text == 'Default') {
 		lbStatus.textContent = "Don't delete the Default dialog."
 		return;
 	}
 	lbStatus.textContent = 'Dialog ' + opt.text + ' was deleted.'
 	localStorage.removeItem(baseKey + opt.text)
-	slTopic.removeChild(opt);
-	changeTopic();
-	saveTopics();
+	slThread.removeChild(opt);
+	changeThread();
+	saveThreads();
 }
 const slFunc = document.getElementById("slFunc");
 const tiFunc = document.getElementById("tiFunc");
@@ -87,7 +87,7 @@ function inputTiFunc() {
 	btFunc1.disabled = (tiFunc.value === '');
 	if (slFunc.value === 'New topic') {
 		lbStatus.textContent = 'Editing the topic name...';
-		btFunc2.disabled = (tiFunc.value === '' || slTopic.value === 'Default');
+		btFunc2.disabled = (tiFunc.value === '' || slThread.value === 'Default');
 	} else if (slFunc.value === 'Search') {
 		lbStatus.textContent = 'Editing the search regex...';
 		btFunc2.disabled = (tiFunc.value === '');
@@ -101,13 +101,13 @@ function clickBtFunc1() {
 		searchRegexHere();
 		return;
 	} else if (slFunc.value === 'Down/Upload') {
-		downloadTopics();
+		downloadThreads();
 		return;
 	}
 	let trimmed = tiFunc.value.trim();
 	if (trimmed == "") return;
-	for (let i = 0; i < slTopic.options.length; i++) {
-		if (slTopic.options[i].text == trimmed) {
+	for (let i = 0; i < slThread.options.length; i++) {
+		if (slThread.options[i].text == trimmed) {
 			lbStatus.textContent = trimmed + ' already exist.';
 			return;
 		}
@@ -115,17 +115,17 @@ function clickBtFunc1() {
 	let opt = document.createElement("option");
 	opt.text = trimmed;
 	opt.value = trimmed;
-	slTopic.add(opt);
-	slTopic.value = trimmed;
-	changeTopic()
-	saveTopics();
+	slThread.add(opt);
+	slThread.value = trimmed;
+	changeThread()
+	saveThreads();
 	tiFunc.value = ''; btFunc1.disabled = true; btFunc2.disabled = true;
 	lbStatus.textContent = trimmed + ' was added as a new dialog.';
 }
-function saveTopics() {
+function saveThreads() {
 	let vals = []
-	for (let i = 0; i < slTopic.options.length; i++) {
-		vals.push(slTopic.options[i].value);
+	for (let i = 0; i < slThread.options.length; i++) {
+		vals.push(slThread.options[i].value);
 	}
 	vals.sort()
 	localStorage.setItem(baseKey, vals.join(";"));
@@ -138,13 +138,13 @@ function clickBtFunc2() {
 	}
 	const trimmed = tiFunc.value.trim();
 	if (trimmed == "") return;
-	for (let i = 0; i < slTopic.options.length; i++) {
-		if (slTopic.options[i].text == trimmed) {
+	for (let i = 0; i < slThread.options.length; i++) {
+		if (slThread.options[i].text == trimmed) {
 			lbStatus.textContent = trimmed + ' already exist.';
 			return;
 		}
 	}
-	const opt = slTopic.options[slTopic.selectedIndex];
+	const opt = slThread.options[slThread.selectedIndex];
 	const oldKey = opt.value;
 	if (oldKey === trimmed) return;
 	opt.text = trimmed;
@@ -152,7 +152,7 @@ function clickBtFunc2() {
 	let value = localStorage.getItem(baseKey + oldKey);
 	localStorage.setItem(baseKey + trimmed, value);
 	localStorage.removeItem(baseKey + oldKey);
-	saveTopics();
+	saveThreads();
 	curKey = trimmed;
 	tiFunc.value = ''; btFunc1.disabled = true; btFunc2.disabled = true;
 	lbStatus.textContent = 'Dialog ' + oldKey + ' has been renamed to ' + trimmed + '.'
@@ -233,25 +233,25 @@ function searchRegexAnywhere() {
 	if (trimmed == "") return;
 	const regex = new RegExp(trimmed, 'i');
 	let result = '';
-	for (let i = 0; i < slTopic.options.length; i++) {
-		let str = localStorage.getItem(baseKey + slTopic.options[i].text);
+	for (let i = 0; i < slThread.options.length; i++) {
+		let str = localStorage.getItem(baseKey + slThread.options[i].text);
 		if (str === null) continue;
 		let matchedLines = str.split('\n').filter(function(line) {
 			return line.match(regex);
 		});
 		if (matchedLines.length > 0) {
-			result += '------' + slTopic.options[i].text + '------\n'
+			result += '------' + slThread.options[i].text + '------\n'
 				+ matchedLines.join('\n') + '\n';
 		}
 	}
 	if (result !== '') alert(result)
 }
-function downloadTopics() {
+function downloadThreads() {
 	let topics = {};
-	for (let i = 0; i < slTopic.options.length; i++) {
-		let str = localStorage.getItem(baseKey + slTopic.options[i].text);
+	for (let i = 0; i < slThread.options.length; i++) {
+		let str = localStorage.getItem(baseKey + slThread.options[i].text);
 		if (str === null) continue;
-		topics[slTopic.options[i].text] = str;
+		topics[slThread.options[i].text] = str;
 	}
 	const data = JSON.stringify(topics);
 	const blob = new Blob([data], { type: "application/json" });
