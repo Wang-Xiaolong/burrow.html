@@ -55,7 +55,7 @@ function changeFunc() {
 	tiFunc.value = '';
 	btFunc1.disabled = true;
 	btFunc2.disabled = true;
-	if (slFunc.value === 'New topic') {
+	if (slFunc.value === 'New Thread') {
 		btFunc1.textContent = 'Insert';
 		btFunc2.textContent = 'Rename';
 		tiFunc.placeholder = 'Name it here.'
@@ -85,7 +85,7 @@ function focusTiFunc() {
 }
 function inputTiFunc() {
 	btFunc1.disabled = (tiFunc.value === '');
-	if (slFunc.value === 'New topic') {
+	if (slFunc.value === 'New Thread') {
 		lbStatus.textContent = 'Editing the topic name...';
 		btFunc2.disabled = (tiFunc.value === '' || slThread.value === 'Default');
 	} else if (slFunc.value === 'Search') {
