@@ -329,6 +329,7 @@ function importThreads() {
 				slThread.options.add(opt);
 			});
 			saveThreads();
+			slThread.onchange();
 		};
 		reader.readAsText(file);
 	};
