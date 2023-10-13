@@ -21,12 +21,9 @@ let curKey = 'Default';
 function changeThread() {
 	curKey = slThread.value
 	taHistory.value = localStorage.getItem(baseKey + curKey);
-	if (curKey == 'Default') {
-		btDelThread.disabled = true;
-		btFunc2.disabled = true;
-	} else {
-		btDelThread.disabled = false;
-		btFunc2.disabled = (tiFunc.value == '')
+	btDelThread.disabled = (curKey == 'Default') && (slThread.options.length > 1);
+	if (slFunc.value === 'New Thread') {
+		btFunc2.disabled = (curKey == 'Default') || (tiFunc.value == '');
 	}
 	lbStatus.textContent = 'Switched to ' + curKey;
 }
