@@ -134,13 +134,15 @@ function saveThreads() {
 }
 const btFunc2 = document.getElementById("btFunc2");
 function clickBtFunc2() {
-	if (slFunc.value === 'Search') {
+	if (slFunc.value === 'New Thread') {
+		renameThread();
+	} else if (slFunc.value === 'Search') {
 		searchRegexAnywhere();
-		return;
 	} else if (slFunc.value === 'Ex/Import') {
 		importThreads();
-		return;
 	}
+}
+function renameThread() {
 	const trimmed = tiFunc.value.trim();
 	if (trimmed == "") return;
 	for (let i = 0; i < slThread.options.length; i++) {
@@ -160,7 +162,7 @@ function clickBtFunc2() {
 	saveThreads();
 	curKey = trimmed;
 	tiFunc.value = ''; btFunc1.disabled = true; btFunc2.disabled = true;
-	lbStatus.textContent = 'Dialog ' + oldKey + ' has been renamed to ' + trimmed + '.'
+	lbStatus.textContent = 'Thread ' + oldKey + ' has been renamed to ' + trimmed + '.'
 }
 const taHistory = document.getElementById("taHistory");
 if (urlParams.has('hr')) taHistory.rows = urlParams.get('hr');
