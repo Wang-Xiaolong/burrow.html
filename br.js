@@ -315,11 +315,26 @@ function importThreads() {
 		const file = event.target.files[0];
 		const reader = new FileReader();
 		reader.onload = function(event) {
+			const result = window.confirm("Before importing a local json file, all threads in the current process will be thrown away.\nAre you sure you want to proceed?");
+			if (result === false) return;
+			let len = slThread.options.length
+			for (let i = len - 1; i >= 0; i--) {
+				localStorage.removeItem(baseKey + slThread.options[i].value);
+				slThread.remove(i);
+			}
+			localStorage.removeItem(baseKey);
 			const data = JSON.parse(event.target.result);
-			console.log(data);
+			Object.keys(data).forEach(function(key) {
+				localStorage.setItem(baseKey + key, data[key])
+				let opt = document.createElement("option");
+				opt.text = key;
+				opt.value = key;
+				slThread.options.add(opt);
+			});
 		};
 		reader.readAsText(file);
 	};
 	input.click();
+	saveThreads();
 	input.remove();
 }
