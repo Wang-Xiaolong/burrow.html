@@ -1,6 +1,7 @@
 const urlParams = new URLSearchParams(window.location.search);
 const proc = urlParams.get('proc') || '';
 const baseKey = "Burrow/" + proc + '/';
+document.title = baseKey;
 const slThread = document.getElementById("slThread");
 const keysStr = localStorage.getItem(baseKey)
 if (keysStr !== null) {
@@ -145,7 +146,7 @@ function saveThreads() {
 	for (let i = 0; i < slThread.options.length; i++) {
 		vals.push(slThread.options[i].value);
 	}
-	vals.sort()
+	vals.sort();
 	localStorage.setItem(baseKey, vals.join(";"));
 }
 const btFunc2 = document.getElementById("btFunc2");
@@ -327,10 +328,10 @@ function importThreads() {
 				opt.value = key;
 				slThread.options.add(opt);
 			});
+			saveThreads();
 		};
 		reader.readAsText(file);
 	};
 	input.click();
-	saveThreads();
 	input.remove();
 }
