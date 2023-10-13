@@ -209,13 +209,31 @@ function saveMessage() {
 	let trimmed = taMessage.value.trim();
 	if (trimmed == "") return;
 	let now = new Date();
-	let sDt = "<#" + ("0" + (now.getMonth() + 1)).slice(-2) + ("0" + now.getDate()).slice(-2) + "." + ("0" + now.getHours()).slice(-2) + ("0" + now.getMinutes()).slice(-2) + ("0" + now.getSeconds()).slice(-2) + ">";
+	let sDt = "#" + getCurrentTime(1);
 	taHistory.value = taHistory.value.trimEnd() + "\n" +  sDt + "\n" + trimmed;
 	taMessage.value = "";
 	btSave.disabled = true;
 	taHistory.scrollTop = taHistory.scrollHeight;
 	localStorage.setItem(baseKey + curKey, taHistory.value);
 	lbStatus.textContent = 'A message was just added to the history.';
+}
+function getCurrentTime(type) {
+	const date = new Date();
+	const year = date.getFullYear().toString().substr(-2);
+	const month = ('0' + (date.getMonth() + 1)).slice(-2);
+	const day = ('0' + date.getDate()).slice(-2);
+	const hours = ('0' + date.getHours()).slice(-2);
+	const minutes = ('0' + date.getMinutes()).slice(-2);
+	const seconds = ('0' + date.getSeconds()).slice(-2);
+	let formattedDate;
+	if (type === 1) {
+		formattedDate = `${month}${day}_${hours}${minutes}${seconds}`;
+	} else if (type === 2) {
+		formattedDate = `${year}${month}${day}_${hours}${minutes}${seconds}`;
+	} else {
+		formattedDate = 'Invalid type argument';
+	}
+	return formattedDate;
 }
 function clickSave() {
 	saveMessage();
@@ -260,7 +278,7 @@ function exportThreads() {
 	const url = URL.createObjectURL(blob);
 	const link = document.createElement("a");
 	link.setAttribute("href", url);
-	link.setAttribute("download", proc + '.json');
+	link.setAttribute("download", proc + '_' + getCurrentTime(2) + '.json');
 	document.body.appendChild(link);
 	link.click();
 	link.remove();
