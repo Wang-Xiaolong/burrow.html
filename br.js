@@ -36,10 +36,10 @@ slThread.addEventListener('keydown', function(event) {
 function deleteThread() {
 	let opt = slThread.options[slThread.selectedIndex];
 	if (opt.text == 'Default') {
-		lbStatus.textContent = "Don't delete the Default dialog."
+		lbStatus.textContent = "Don't delete the Default thread."
 		return;
 	}
-	lbStatus.textContent = 'Dialog ' + opt.text + ' was deleted.'
+	lbStatus.textContent = 'Thread ' + opt.text + ' was deleted.'
 	localStorage.removeItem(baseKey + opt.text)
 	slThread.removeChild(opt);
 	changeThread();
