@@ -63,9 +63,9 @@ function changeFunc() {
 		btFunc1.textContent = 'Here';
 		btFunc2.textContent = 'Anywhere';
 		tiFunc.placeholder = 'Input regex here.'
-	} else if (slFunc.value === 'Down/Upload') {
-		btFunc1.textContent = 'Down';
-		btFunc2.textContent = 'Upload';
+	} else if (slFunc.value === 'Ex/Import') {
+		btFunc1.textContent = 'Export';
+		btFunc2.textContent = 'Import';
 		tiFunc.placeholder = 'Local file path...'
 	}
 }
@@ -91,7 +91,7 @@ function inputTiFunc() {
 	} else if (slFunc.value === 'Search') {
 		lbStatus.textContent = 'Editing the search regex...';
 		btFunc2.disabled = (tiFunc.value === '');
-	} else if (slFunc.value === 'Down/Upload') {
+	} else if (slFunc.value === 'Ex/Import') {
 		lbStatus.textContent = 'Editing local file path...';
 		btFunc2.disabled = (tiFunc.value === '');
 	}
@@ -100,8 +100,8 @@ function clickBtFunc1() {
 	if (slFunc.value === 'Search') {
 		searchRegexHere();
 		return;
-	} else if (slFunc.value === 'Down/Upload') {
-		downloadThreads();
+	} else if (slFunc.value === 'Ex/Import') {
+		exportThreads();
 		return;
 	}
 	let trimmed = tiFunc.value.trim();
@@ -135,8 +135,8 @@ function clickBtFunc2() {
 	if (slFunc.value === 'Search') {
 		searchRegexAnywhere();
 		return;
-	} else if (slFunc.value === 'Down/Upload') {
-		loadThreads();
+	} else if (slFunc.value === 'Ex/Import') {
+		importThreads();
 		return;
 	}
 	const trimmed = tiFunc.value.trim();
@@ -249,7 +249,7 @@ function searchRegexAnywhere() {
 	}
 	if (result !== '') alert(result)
 }
-function downloadThreads() {
+function exportThreads() {
 	let topics = {};
 	for (let i = 0; i < slThread.options.length; i++) {
 		let str = localStorage.getItem(baseKey + slThread.options[i].text) || '';
@@ -265,7 +265,7 @@ function downloadThreads() {
 	link.click();
 	link.remove();
 }
-function loadThreads() {
+function importThreads() {
 	const input = document.createElement('input');
 	input.type = 'file';
 	input.accept = '.json';
