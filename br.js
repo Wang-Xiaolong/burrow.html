@@ -36,7 +36,17 @@ slThread.addEventListener('keydown', function(event) {
 function deleteThread() {
 	let opt = slThread.options[slThread.selectedIndex];
 	if (opt.text == 'Default') {
-		lbStatus.textContent = "Don't delete the Default thread."
+		if (slThread.options.length > 1) {
+			lbStatus.textContent = "Don't delete the Default thread."
+		} else {
+			let result = window.confirm("The Default thread is the only one left in the process.\nDeleting it means to delete the whole process.\nAre you sure you want to proceed?");
+			if (result == true) {
+				localStorage.removeItem(baseKey + 'Default');
+				localStorage.removeItem(baseKey)
+				document.documentElement.innerHTML = '';
+				alert('Everything was removed. Please close the window.')
+			}
+		}
 		return;
 	}
 	lbStatus.textContent = 'Thread ' + opt.text + ' was deleted.'
