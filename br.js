@@ -1,10 +1,6 @@
 const urlParams = new URLSearchParams(window.location.search);
-const proc = urlParams.get('proc');
-let baseKey = "Burrow";
-if (proc != null) {
-	document.title = "Burrow:" + proc;
-	baseKey = "Burrow/" + proc + '/';
-}
+const proc = urlParams.get('proc') || '';
+const baseKey = "Burrow/" + proc + '/';
 const slThread = document.getElementById("slThread");
 const keysStr = localStorage.getItem(baseKey)
 if (keysStr !== null) {
