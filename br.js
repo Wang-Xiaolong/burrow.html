@@ -97,13 +97,15 @@ function inputTiFunc() {
 	}
 }
 function clickBtFunc1() {
-	if (slFunc.value === 'Search') {
+	if (slFunc.value === 'New Thread') {
+		insertThread();
+	} else if (slFunc.value === 'Search') {
 		searchRegexHere();
-		return;
 	} else if (slFunc.value === 'Ex/Import') {
 		exportThreads();
-		return;
 	}
+}
+function insertThread() {
 	let trimmed = tiFunc.value.trim();
 	if (trimmed == "") return;
 	for (let i = 0; i < slThread.options.length; i++) {
@@ -120,7 +122,7 @@ function clickBtFunc1() {
 	changeThread()
 	saveThreads();
 	tiFunc.value = ''; btFunc1.disabled = true; btFunc2.disabled = true;
-	lbStatus.textContent = trimmed + ' was added as a new dialog.';
+	lbStatus.textContent = trimmed + ' was added as a new thread.';
 }
 function saveThreads() {
 	let vals = []
