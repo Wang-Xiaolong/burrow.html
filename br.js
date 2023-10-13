@@ -52,21 +52,33 @@ const slFunc = document.getElementById("slFunc");
 const tiFunc = document.getElementById("tiFunc");
 const btFunc1 = document.getElementById("btFunc1");
 function changeFunc() {
-	tiFunc.value = '';
-	btFunc1.disabled = true;
-	btFunc2.disabled = true;
 	if (slFunc.value === 'New Thread') {
+		btFunc1.disabled = true;
 		btFunc1.textContent = 'Insert';
+		btFunc2.disabled = true;
 		btFunc2.textContent = 'Rename';
+		tiFunc.disabled = false;
+		tiFunc.value = '';
 		tiFunc.placeholder = 'Name it here.'
+		lbStatus.textContent = 'Create or rename a thread.'
 	} else if (slFunc.value === 'Search') {
+		btFunc1.disabled = true;
 		btFunc1.textContent = 'Here';
+		btFunc2.disabled = true;
 		btFunc2.textContent = 'Anywhere';
+		tiFunc.disabled = false;
+		tiFunc.value = '';
 		tiFunc.placeholder = 'Input regex here.'
+		lbStatus.textContent = 'Search with regex.'
 	} else if (slFunc.value === 'Ex/Import') {
+		btFunc1.disabled = false;
 		btFunc1.textContent = 'Export';
+		btFunc2.disabled = false;
 		btFunc2.textContent = 'Import';
-		tiFunc.placeholder = 'Local file path...'
+		tiFunc.disabled = true;
+		tiFunc.value = '';
+		tiFunc.placeholder = 'To/From a file:'
+		lbStatus.textContent = 'Export to or import from a local file.'
 	}
 }
 tiFunc.addEventListener('keydown', function(event) {
@@ -81,18 +93,19 @@ tiFunc.addEventListener('keydown', function(event) {
 	}
 });
 function focusTiFunc() {
-	lbStatus.textContent = 'Ready to name a topic.';
+	if (slFunc.value === 'New Thread') {
+		lbStatus.textContent = 'Ready to name a thread.';
+	} else if (slFunc.value === 'Search') {
+		lbStatus.textContent = 'Ready to input a search regex.';
+	}
 }
 function inputTiFunc() {
 	btFunc1.disabled = (tiFunc.value === '');
 	if (slFunc.value === 'New Thread') {
-		lbStatus.textContent = 'Editing the topic name...';
+		lbStatus.textContent = 'Editing the thread name...';
 		btFunc2.disabled = (tiFunc.value === '' || slThread.value === 'Default');
 	} else if (slFunc.value === 'Search') {
 		lbStatus.textContent = 'Editing the search regex...';
-		btFunc2.disabled = (tiFunc.value === '');
-	} else if (slFunc.value === 'Ex/Import') {
-		lbStatus.textContent = 'Editing local file path...';
 		btFunc2.disabled = (tiFunc.value === '');
 	}
 }
