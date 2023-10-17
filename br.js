@@ -16,7 +16,7 @@ if (keysStr !== null) {
 }
 let curKey = 'Default';
 function changeThread() {
-	curKey = slThread.value
+	curKey = slThread.value;
 	taHistory.value = localStorage.getItem(baseKey + curKey);
 	btDelThread.disabled = (curKey == 'Default') && (slThread.options.length > 1);
 	if (slFunc.value === 'New Thread') {
@@ -49,6 +49,7 @@ function deleteThread() {
 	lbStatus.textContent = 'Thread ' + opt.text + ' was deleted.'
 	localStorage.removeItem(baseKey + opt.text)
 	slThread.removeChild(opt);
+	slThread.value = 'Default';
 	changeThread();
 	saveThreads();
 }
